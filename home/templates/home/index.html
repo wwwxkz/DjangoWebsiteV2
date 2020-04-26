@@ -19,7 +19,7 @@
 		<div class="row mt-5 justify-content-between"> 
 			<h2 class="ml-3">Places</h2>
 			<div class="row mr-3">
-				<h6>P/B</h6>
+				<!-- <h6>P/B</h6> -->
 				<h6>Login</h6>
 			</div>
 		</div>
@@ -29,7 +29,7 @@
 		  <div class="col-sm-6">
 		    <div class="card">
 		      <div class="card-body">
-		        <h5 class="card-title">Special title treatment</h5>
+		        <h5 class="card-title">Articles</h5>
 		        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 		        <a href="#" class="btn btn-primary">Go somewhere</a>
 		      </div>
@@ -39,7 +39,7 @@
 		  <div class="col-sm-6">
 		    <div class="card">
 		      <div class="card-body">
-		        <h5 class="card-title">Special title treatment</h5>
+		        <h5 class="card-title">Posts</h5>
 		        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 		        <a href="#" class="btn btn-primary">Go somewhere</a>
 		      </div>
@@ -52,93 +52,36 @@
 
 		<h2 class="mt-5">Latest Activities</h2>
 
-		<div class="row mt-4">
-
-			<div class="col">
-				<div class="card">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
-				  </div>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="card">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
-				  </div>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="card">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
-				  </div>
-				</div>
-			</div>
-
-		</div>
-
-		<div class="row mt-4">
-
-			<div class="col">
-				<div class="card">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
-				  </div>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="card">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
-				  </div>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="card">
-				  <div class="card-body">
-				    <h5 class="card-title">Card title</h5>
-				    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-				    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-				    <a href="#" class="card-link">Card link</a>
-				    <a href="#" class="card-link">Another link</a>
-				  </div>
-				</div>
-			</div>
-
-		</div>
-
+		{% if latest_article_list %}
+		    <div class="row mt-4">
+			    {% for article in latest_article_list %}
+					<div class="col-sm-4">
+						<div class="card">
+							<div class="card-body">
+						    	<h5 class="card-title"><a href="/articles/{{ article.id }}/">{{ article.title }}</a></h5>
+						    	<h6 class="card-subtitle mb-2 text-muted">{{ article.category }}</h6>
+								<p class="card-text">{{ article.text | truncatewords:30 }}</p>
+								<!-- <a href="/articles/{{ article.id }}/" class="card-link">Card link</a> -->
+			
+						  	</div>
+						</div>
+					</div>
+					{% if article.title == latest_article_list.2.title %}
+						</div>
+			    		<div class="row mt-4">
+					{% endif %}
+			    {% endfor %}
+		    </div>
+		{% else %}
+		    <p>No articles are available.</p>
+		{% endif %}
 
 
 		<h2 class="mt-5">Shop</h2>
 
 		<div class="row mt-4">
 
-			<div class="col">
+			<div class="col-sm-4">
 				<div class="card">
 				  <img src="..." class="card-img-top" alt="...">
 				  <div class="card-body">
@@ -149,7 +92,7 @@
 				</div>
 			</div>
 
-			<div class="col">
+			<div class="col-sm-4">
 				<div class="card">
 				  <img src="..." class="card-img-top" alt="...">
 				  <div class="card-body">
@@ -160,7 +103,7 @@
 				</div>
 			</div>
 
-			<div class="col">
+			<div class="col-sm-4">
 				<div class="card">
 				  <img src="..." class="card-img-top" alt="...">
 				  <div class="card-body">
